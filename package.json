@@ -1,14 +1,12 @@
 {
-  "name": "logindemo",
+  "name": "idea-manage",
   "version": "1.0.0",
   "description": "express login demo",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [
-    "express"
-  ],
+  "keywords": ["express"],
   "author": "angelki",
   "license": "MIT",
   "dependencies": {
