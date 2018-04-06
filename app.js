@@ -9,7 +9,7 @@ const app = express();
 mongoose.Promise = global.Promise;
 // connect to mongoose
 mongoose
-  .connect("mongodb://localhost/aideasDev", {
+  .connect("mongodb://localhost/aideas-dev", {
     useMongoClient: true
   })
   .then(() => console.log("Mongodb connected..."))
@@ -60,7 +60,13 @@ app.post("/ideas", (req, res) => {
       details: req.body.details
     });
   } else {
-    res.send(`passed`);
+    const newUser = {
+      title: req.body.title,
+      details: req.body.details
+    };
+    new Idea(newUser).save().then(idea => {
+      res.redirect("./ideas");
+    });
   }
 });
 
