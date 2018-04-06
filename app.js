@@ -55,6 +55,17 @@ app.get("/ideas/add", (req, res) => {
   res.render("ideas/add");
 });
 
+// edit idea
+app.get("/ideas/edit/:id", (req, res) => {
+  Idea.findOne({
+    _id: req.params.id
+  }).then(idea => {
+    res.render("ideas/edit", {
+      idea: idea
+    });
+  });
+});
+
 // process form
 app.post("/ideas", (req, res) => {
   let errors = [];
