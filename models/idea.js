@@ -17,4 +17,5 @@ const IdeaSchema = new Schema({
   }
 });
 
+// compiling schema into model
 mongoose.model("ideas", IdeaSchema);
