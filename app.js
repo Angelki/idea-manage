@@ -1,18 +1,21 @@
 const express = require("express");
 const exphbs = require("express-handlebars");
+const mongoose = require("mongoose");
 
 const app = express();
+
+// Map global promise - get rid of warning
+// connect to mongoose
+mongoose
+  .connect("mongodb://localhost/aideas-dev", {
+    useMongoClient: true
+  })
+  .then(() => console.log("Mongodb connected..."))
+  .catch(err => console.log(err));
 
 //handlebars middleware
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
-
-// How middleware works
-// app.use((req, res, next) => {
-//   console.log(Date.now());
-//   req.name = "Brad Travery";
-//   next();
-// });
 
 app.get("/", (req, res) => {
   const title = "Welcome2";
