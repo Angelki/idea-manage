@@ -28,6 +28,9 @@ app.set("view engine", "handlebars");
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+// static files
+app.use("/static", express.static("static"));
+
 // Method override middleware
 app.use(methodOverride("_method"));
 
