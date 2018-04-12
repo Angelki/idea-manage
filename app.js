@@ -1,5 +1,6 @@
 const express = require("express");
 const exphbs = require("express-handlebars");
+const path = require('path');
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
@@ -30,7 +31,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // static files
-app.use("/static", express.static("static"));
+// app.use("/static", express.static("static"));
+app.use('/public', express.static(path.join(__dirname, 'public')));
 
 // Method override middleware
 app.use(methodOverride("_method"));
