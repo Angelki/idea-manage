@@ -9,7 +9,7 @@ const app = express();
 
 // load routes
 const ideas = require('./routes/ideas');
-
+const users = require('./routes/users');
 
 // Map global promise - get rid of warning
 mongoose.Promise = global.Promise;
@@ -65,18 +65,9 @@ app.get("/about", (req, res) => {
   res.render("about");
 });
 
-// User Login Route
-app.get('/users/login', (req, res) => {
-  res.send('login');
-});
-
-// User register  Route
-app.get('/users/register', (req, res) => {
-  res.send('register');
-});
-
 // use routes
 app.use('/ideas', ideas);
+app.use('/users', users);
 
 const port = 5000;
 

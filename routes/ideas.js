@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require("mongoose");
+
 // load Idea model
 require("../models/Idea");
 const Idea = mongoose.model("ideas");
