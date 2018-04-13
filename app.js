@@ -86,6 +86,3 @@ const port = 5000;
 app.listen(port, () => {
   console.log(`Server started on port: ${port}`);
 });
-
-// mongod.exe --logpath C:\mongodb\log\mongo.log --logappend --dbpath C:\mongodb\data\db --serviceName MongoDB --journal --install
-// http://gitlab.decobim.com/root/web-deco-platform.git
