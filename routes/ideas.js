@@ -8,8 +8,9 @@ require("../models/Idea");
 const Idea = mongoose.model("ideas");
 
 // ideas index page
+// 只有当前想法的user属性等于当前用户的id时才会显示
 router.get("/", ensureAuthenticated, (req, res) => {
-  Idea.find({})
+  Idea.find({ user: req.user.id })
     .sort({ date: "desc" })
     .then(ideas => {
       res.render("ideas/index", {
@@ -28,9 +29,15 @@ router.get("/edit/:id", ensureAuthenticated, (req, res) => {
   Idea.findOne({
     _id: req.params.id
   }).then(idea => {
-    res.render("ideas/edit", {
-      idea: idea
-    });
+    // 如果当前idea的userid不等于当前用户 则不给访问 防止复制url直接进入编辑页面
+    if (idea.user !== req.user.id) {
+      req.flash("error_msg", "Not Authorized");
+      res.redirect("/ideas");
+    } else {
+      res.render("ideas/edit", {
+        idea: idea
+      });
+    }
   });
 });
 
@@ -52,7 +59,8 @@ router.post("/", ensureAuthenticated, (req, res) => {
   } else {
     const newIdea = {
       title: req.body.title,
-      details: req.body.details
+      details: req.body.details,
+      user: req.user.id
     };
     new Idea(newIdea).save().then(idea => {
       req.flash("success_msg", "IDEA Added!");
