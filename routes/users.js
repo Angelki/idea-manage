@@ -81,4 +81,12 @@ router.post("/register", (req, res) => {
   }
 });
 
+// logout user
+router.get("/logout", (req, res) => {
+  // passport暴露在req上的一个函数，终止login session 移除req.user 清除login session
+  req.logout();
+  req.flash("success_msg", "Your are Logged out");
+  res.redirect("/users/login");
+});
+
 module.exports = router;
