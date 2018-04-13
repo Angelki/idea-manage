@@ -8,8 +8,6 @@ const User = mongoose.model("users");
 
 module.exports = passport => {
   passport.use(
-    new LocalStrategy({ usernameField: "email" }, (email, password, done) => {
-      console.log(password);
-    })
+    new LocalStrategy({ usernameField: "email" }, (email, password, done) => {})
   );
 };
