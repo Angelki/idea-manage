@@ -38,7 +38,7 @@ app.use(bodyParser.json());
 // app.use("/static", express.static("static"));
 app.use("/public", express.static(path.join(__dirname, "public")));
 
-// Method override middleware
+// Method override middleware-
 app.use(methodOverride("_method"));
 
 // express session middleware
@@ -50,12 +50,18 @@ app.use(
   })
 );
 
+// Passport middleware init
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use(flash());
+
 // global variables
 app.use((req, res, next) => {
   res.locals.success_msg = req.flash("success_msg");
   res.locals.error_msg = req.flash("error_msg");
   res.locals.error = req.flash("error");
+  res.locals.user = req.user || null;
   next();
 });
 // index route
