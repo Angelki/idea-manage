@@ -1,16 +1,20 @@
 const express = require("express");
 const exphbs = require("express-handlebars");
-const path = require('path');
+const path = require("path");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
+const passport = require("passport");
 const methodOverride = require("method-override");
 const flash = require("connect-flash");
 const session = require("express-session");
 const app = express();
 
 // load routes
-const ideas = require('./routes/ideas');
-const users = require('./routes/users');
+const ideas = require("./routes/ideas");
+const users = require("./routes/users");
+
+// Passport Config
+require("./config/passport")(passport);
 
 // Map global promise - get rid of warning
 mongoose.Promise = global.Promise;
@@ -32,7 +36,7 @@ app.use(bodyParser.json());
 
 // static files
 // app.use("/static", express.static("static"));
-app.use('/public', express.static(path.join(__dirname, 'public')));
+app.use("/public", express.static(path.join(__dirname, "public")));
 
 // Method override middleware
 app.use(methodOverride("_method"));
@@ -68,8 +72,8 @@ app.get("/about", (req, res) => {
 });
 
 // use routes
-app.use('/ideas', ideas);
-app.use('/users', users);
+app.use("/ideas", ideas);
+app.use("/users", users);
 
 const port = 5000;
 
