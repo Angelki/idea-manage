@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const { ensureAuthenticated } = require("../helpers/auth");
 
 // load Idea model
-require("../models/Idea");
+require("../models/idea");
 const Idea = mongoose.model("ideas");
 
 // ideas index page
